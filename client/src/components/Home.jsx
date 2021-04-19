@@ -93,8 +93,11 @@ const Home = () => {
                   />
                   <Title text='Educations' />
                   {showModal.education && (
-                    <Modal title='Education' setShowModal={setShowModal}>
-                      <CreateEducation setShowModal={setShowModal} />
+                    <Modal title='Education'>
+                      <CreateEducation
+                        showModal={showModal}
+                        setShowModal={setShowModal}
+                      />
                     </Modal>
                   )}
                   {(global.user &&
@@ -125,8 +128,11 @@ const Home = () => {
                   />
                   <Title text='Experiences' />
                   {showModal.experience && (
-                    <Modal title='Experience' setShowModal={setShowModal}>
-                      <CreateExperience setShowModal={setShowModal} />
+                    <Modal title='Experience'>
+                      <CreateExperience
+                        showModal={showModal}
+                        setShowModal={setShowModal}
+                      />
                     </Modal>
                   )}
                   {(global.user &&

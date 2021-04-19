@@ -1,14 +1,17 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
+import { GlobalContext } from '../context/globalContext'
 import ExperienceApi from '../api/experience'
 
-const CreateExperience = () => {
+const CreateExperience = ({ showModal, setShowModal }) => {
+  const global = useContext(GlobalContext)
   const title = useRef(null)
   const type = useRef(null)
   const company = useRef(null)
   const start_date = useRef(null)
   const end_date = useRef(null)
 
-  const handleExperience = () => {
+  const handleExperience = (e) => {
+    e.preventDefault()
     const experienceData = {
       title: title.current.value,
       type: type.current.value,
@@ -18,15 +21,13 @@ const CreateExperience = () => {
     }
     ExperienceApi.createExperience(experienceData)
       .then((res) => {
-        if (res.data.newExperience) {
-          global.setUser({
-            ...global.user,
-            educations: global.user.experiences.push(res.data.newExperience),
-          })
+        if (res.data.experience) {
+          global.user.experiences.push(res.data.experience)
           global.setAlert({
             type: 'success',
             message: res.data.message,
           })
+          setShowModal({ ...showModal, experience: false })
         }
       })
       .catch((err) => {

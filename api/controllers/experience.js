@@ -10,11 +10,9 @@ exports.create_experience = (req, res) => {
   ).exec()
 
   Promise.all([newExperience, updateUser])
-    .then((experience, updateUser) => {
-      if (!experience || updateUser.nModified == 0)
-        throw new Error('Action failed')
+    .then(([experience, user]) => {
+      if (!experience || user.nModified == 0) throw new Error('Action failed')
 
-      console.log(experience.title)
       res.status(200).json({ message: 'Action successfull', experience })
     })
     .catch((err) => {

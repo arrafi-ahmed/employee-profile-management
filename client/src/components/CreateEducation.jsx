@@ -1,7 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
+import { GlobalContext } from '../context/globalContext'
 import EducationApi from '../api/education'
 
-const CreateEducation = () => {
+const CreateEducation = ({ showModal, setShowModal }) => {
+  const global = useContext(GlobalContext)
   const school = useRef(null)
   const degree = useRef(null)
   const field = useRef(null)
@@ -9,7 +11,8 @@ const CreateEducation = () => {
   const end_year = useRef(null)
   const grade = useRef(null)
 
-  const handleEducation = () => {
+  const handleEducation = (e) => {
+    e.preventDefault()
     const educationData = {
       school: school.current.value,
       degree: degree.current.value,
@@ -21,14 +24,12 @@ const CreateEducation = () => {
     EducationApi.createEducation(educationData)
       .then((res) => {
         if (res.data.education) {
-          global.setUser({
-            ...global.user,
-            educations: global.user.educations.push(res.data.education),
-          })
+          global.user.educations.push(res.data.education)
           global.setAlert({
             type: 'success',
             message: res.data.message,
           })
+          setShowModal({ ...showModal, education: false })
         }
       })
       .catch((err) => {
