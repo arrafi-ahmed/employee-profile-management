@@ -1,0 +1,33 @@
+a {
+  text-decoration: none;
+}
+.navbar a {
+  text-decoration: none;
+}
+.badge {
+  padding: 0.2em 0.4em;
+  font-size: 1em;
+}
+.pointer {
+  cursor: pointer;
+}
+.custom-alert {
+  top: 3rem;
+  z-index: 9;
+}
+.profile-thumb {
+  width: 30px;
+}
+.modal {
+  display: block;
+}
+@media only screen and (max-width: 576px) {
+  .navbar-mobile {
+    position: absolute;
+    padding: 0 1rem;
+    top: 3rem;
+    left: 0;
+    background: #f8f9fa;
+    width: 100%;
+  }
+}
